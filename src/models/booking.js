@@ -1,40 +1,40 @@
-const { Sequelize, DataTypes} = require('sequelize');
+const Sequelize = require('sequelize');
+const sequelize = require('../db/index');
 
 const booking = sequelize.define('booking', {
 	id: {
-		type: DataTypes.BIGINT,
+		type: Sequelize.BIGINT,
 		primaryKey: true,
 		autoIncrement: true,
 		allowNull: false,
 		field: 'id',
 	},
 	userID: {
-		type: DataTypes.BIGINT,
+		type: Sequelize.BIGINT,
 		allowNull: false,
 		field: 'user_id',
 	},
 	roomID: {
-		type: DataTypes.BIGINT,
+		type: Sequelize.BIGINT,
 		allowNull: false,
 		field: 'room_id',
 	},
 	startDate: {
-		type: DataTypes.DATE,
+		type: Sequelize.DATE,
 		allowNull: false,
 		field: 'start_date',
 	},
 	endDate: {
-		type: DataTypes.DATE,
+		type: Sequelize.DATE,
 		allowNull: false,
 		field: 'end_date',
 	},
 	cost: {
-		type: DataTypes.DOUBLE,
+		type: Sequelize.DOUBLE,
 		allowNull: false,
 		field: 'cost',
 	},
 }, 
 {});
 
-booking.sync();
-console.log(booking === sequelize.models.booking);
+module.exports = booking;

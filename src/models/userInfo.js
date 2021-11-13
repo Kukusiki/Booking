@@ -1,32 +1,32 @@
-const { Sequelize, DataTypes} = require('sequelize');
+const Sequelize = require('sequelize');
+const sequelize = require('../db/index');
 
 const userInfo = sequelize.define('user_info', {
 	id: {
-		type: DataTypes.BIGINT,
+		type: Sequelize.BIGINT,
 		primaryKey: true,
 		autoIncrement: true,
 		allowNull: false,
 		field: 'id',
 	},
 	userID: {
-		type: DataTypes.BIGINT,
+		type: Sequelize.BIGINT,
 		allowNull: false,
 		field: 'user_id',
 	},
 	firstName: {
-		type: DataTypes.STRING(50),
+		type: Sequelize.STRING(50),
 		field: 'first_name',
 	},
 	lastName: {
-		type: DataTypes.STRING(50),
+		type: Sequelize.STRING(50),
 		field: 'last_name',
 	},
 	photo: {
-		type: DataTypes.STRING,
+		type: Sequelize.STRING,
 		field: 'photo',
 	},
 }, 
 {});
 
-userInfo.sync();
-console.log(userInfo === sequelize.models.userInfo);
+module.exports = userInfo;

@@ -1,36 +1,37 @@
-const { Sequelize, DataTypes} = require('sequelize');
-const reviews = sequelize.define('reviews', {
+const Sequelize = require('sequelize');
+const sequelize = require('../db/index');
+
+const review = sequelize.define('reviews', {
 	id: {
-		type: DataTypes.BIGINT,
+		type: Sequelize.BIGINT,
 		primaryKey: true,
 		autoIncrement: true,
 		allowNull: false,
 		field: 'id',
 	},
 	hotelID: {
-		type: DataTypes.BIGINT,
+		type: Sequelize.BIGINT,
 		allowNull: false,
 		field: 'hotel_id',
 	},
 	userID: {
-		type: DataTypes.BIGINT,
+		type: Sequelize.BIGINT,
 		allowNull: false,
 		field: 'user_id',
 	},
 	message: {
-		type: DataTypes.TEXT,
+		type: Sequelize.TEXT,
 		field: 'message',
 	},
 	dateOfWriting: {
-		type: DataTypes.DATE,
+		type: Sequelize.DATE,
 		field: 'date_of_writing',
 	},
 	rate: {
-		type: DataTypes.INTEGER,
+		type: Sequelize.INTEGER,
 		field: 'rate',
 	},
 }, 
 {});
 
-reviews.sync();
-console.log(reviews === sequelize.models.reviews);
+module.exports = review;
