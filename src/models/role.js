@@ -1,19 +1,18 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db/index');
 
-const role = sequelize.define('roles', {
-	id: {
-		type: Sequelize.BIGINT,
-		primaryKey: true,
-		autoIncrement: true,
-		allowNull: false,
-		field: 'id',
-	},
-	name: {
-		type: Sequelize.STRING,
-		field: 'name',
-	},
-}, 
-{});
+const Role = sequelize.define('roles', {
+    id: {
+        type: Sequelize.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+        field: 'id',
+    },
+    name: {
+        type: Sequelize.STRING,
+        field: 'name',
+    },
+}, {});
 
-module.exports = role;
+module.exports = Role;

@@ -1,32 +1,31 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db/index');
 
-const userInfo = sequelize.define('user_info', {
-	id: {
-		type: Sequelize.BIGINT,
-		primaryKey: true,
-		autoIncrement: true,
-		allowNull: false,
-		field: 'id',
-	},
-	userID: {
-		type: Sequelize.BIGINT,
-		allowNull: false,
-		field: 'user_id',
-	},
-	firstName: {
-		type: Sequelize.STRING(50),
-		field: 'first_name',
-	},
-	lastName: {
-		type: Sequelize.STRING(50),
-		field: 'last_name',
-	},
-	photo: {
-		type: Sequelize.STRING,
-		field: 'photo',
-	},
-}, 
-{});
+const UserInfo = sequelize.define('user_info', {
+    id: {
+        type: Sequelize.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+        field: 'id',
+    },
+    userID: {
+        type: Sequelize.BIGINT,
+        allowNull: false,
+        field: 'user_id',
+    },
+    firstName: {
+        type: Sequelize.STRING(50),
+        field: 'first_name',
+    },
+    lastName: {
+        type: Sequelize.STRING(50),
+        field: 'last_name',
+    },
+    photo: {
+        type: Sequelize.STRING,
+        field: 'photo',
+    },
+}, {});
 
-module.exports = userInfo;
+module.exports = UserInfo;

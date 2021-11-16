@@ -1,21 +1,21 @@
-const user = require('./user');
-const userInfo = require('./userInfo');
-const userRole = require('./userRole');
-const role = require('./role');
-const room = require('./room');
-const review = require('./review');
-const hotel = require('./hotel');
-const booking = require('./booking');
+const User = require('./user');
+const UserInfo = require('./userInfo');
+const UserRole = require('./userRole');
+const Role = require('./role');
+const Room = require('./room');
+const Review = require('./review');
+const Hotel = require('./hotel');
+const Booking = require('./booking');
 
 
-user.hasOne(userInfo, {foreignKey: 'userID'});
-user.hasMany(booking, {foreignKey: 'userID'});
-user.hasMany(review, {foreignKey: 'userID'});
+User.hasOne(UserInfo, { foreignKey: 'userID' });
+User.hasMany(Booking, { foreignKey: 'userID' });
+User.hasMany(Review, { foreignKey: 'userID' });
 
-user.belongsToMany(role, {through: userRole, foreignKey: 'userID'});
-role.belongsToMany(user, {through: userRole, foreignKey: 'roleID'});
+User.belongsToMany(Role, { through: UserRole, foreignKey: 'userID' });
+Role.belongsToMany(User, { through: UserRole, foreignKey: 'roleID' });
 
-hotel.hasMany(room, {foreignKey: 'hotelID'});
-hotel.hasMany(review, {foreignKey: 'hotelID'});
+Hotel.hasMany(Room, { foreignKey: 'hotelID' });
+Hotel.hasMany(Review, { foreignKey: 'hotelID' });
 
-room.hasMany(booking, {foreignKey: 'roomID'});
+Room.hasMany(Booking, { foreignKey: 'roomID' });

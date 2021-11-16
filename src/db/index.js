@@ -7,3 +7,4 @@ const sequelize = new Sequelize('booking', 'root', '011570', {
 });
 
 module.exports = sequelize;
+//console.log('123');
