@@ -20,6 +20,9 @@ const User = sequelize.define('users', {
         allowNull: false,
         field: 'password',
     },
-}, {});
+}, {
+    createdAt: false,
+    updatedAt: false
+});
 
 module.exports = User;
