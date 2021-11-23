@@ -9,12 +9,12 @@ const UserRole = sequelize.define('users_roles', {
         allowNull: false,
         field: 'id',
     },
-    roleID: {
+    roleId: {
         type: Sequelize.BIGINT,
         allowNull: false,
         field: 'role_id',
     },
-    userID: {
+    userId: {
         type: Sequelize.BIGINT,
         allowNull: false,
         field: 'user_id',

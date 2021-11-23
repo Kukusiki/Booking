@@ -9,12 +9,12 @@ const Booking = sequelize.define('booking', {
         allowNull: false,
         field: 'id',
     },
-    userID: {
+    userId: {
         type: Sequelize.BIGINT,
         allowNull: false,
         field: 'user_id',
     },
-    roomID: {
+    roomId: {
         type: Sequelize.BIGINT,
         allowNull: false,
         field: 'room_id',

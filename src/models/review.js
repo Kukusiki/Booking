@@ -9,12 +9,12 @@ const Review = sequelize.define('reviews', {
         allowNull: false,
         field: 'id',
     },
-    hotelID: {
+    hotelId: {
         type: Sequelize.BIGINT,
         allowNull: false,
         field: 'hotel_id',
     },
-    userID: {
+    userId: {
         type: Sequelize.BIGINT,
         allowNull: false,
         field: 'user_id',

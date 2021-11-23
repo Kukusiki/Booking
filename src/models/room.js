@@ -9,7 +9,7 @@ const Room = sequelize.define('rooms', {
         allowNull: false,
         field: 'id',
     },
-    hotelID: {
+    hotelId: {
         type: Sequelize.BIGINT,
         allowNull: false,
         field: 'hotel_id',

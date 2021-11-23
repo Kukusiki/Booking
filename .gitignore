@@ -1,3 +1,5 @@
 Booking.docx
 remember.txt
 node_modules/
+*.json
+.env
