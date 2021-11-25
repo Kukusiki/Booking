@@ -1,0 +1,25 @@
+{
+    "name": "booking",
+    "version": "1.0.0",
+    "description": "small booking app",
+    "main": "src/index.js",
+    "dependencies": {
+        "dotenv": "^10.0.0",
+        "mysql2": "^2.3.3",
+        "sequelize": "^6.12.0-alpha.1"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Kukusiki/Booking.git"
+    },
+    "author": "Kukusiki",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Kukusiki/Booking/issues"
+    },
+    "homepage": "https://github.com/Kukusiki/Booking#readme"
+}
