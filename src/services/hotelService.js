@@ -1,35 +1,41 @@
-const Hotel = require('../repositories/hotelRepository');
-const Room = require('../repositories/roomRepository');
+const hotelRepository = require('../repositories/hotelRepository');
+const roomRepository = require('../repositories/roomRepository');
 
 class HotelService {
 
     async addHotel(name, photo, description) {
-        const result = await Hotel.create(name, photo, description);
+        const result = await hotelRepository.create(name, photo, description);
         return result;
     }
 
     async addHotel(hotel) {
-        const result = await Hotel.create(hotel);
+        const result = await hotelRepository.create(hotel);
         return result;
     }
 
     async getHotelById(hotelId) {
-        const result = await Hotel.findHotelById(hotelId);
+        const result = await hotelRepository.findHotelById(hotelId);
         return result;
     }
 
     async getAllHotels() {
-        const result = await Hotel.findAll();
+        const result = await hotelRepository.findAll();
         return result;
     }
 
     async getRoomsByHotelId(hotelId) {
-        const result = await Room.findRoomsByHotelId(hotelId);
+        const result = await roomRepository.findRoomsByHotelId(hotelId);
+        return result;
+    }
+
+    //???
+    async addRoomByHotelId(hotelId, photo, type, cost, free) {
+        const result = await roomRepository.create(hotelId, photo, type, cost, free);
         return result;
     }
 
     async getFreeRoomsByHotelId(hotelId) {
-        const hotelRooms = await getRoomsByHotelId(hotelId);
+        const hotelRooms = await this.getRoomsByHotelId(hotelId);
         let result = [];
         for (let i = 0; i < hotelRooms.length; i++) {
             if (hotelRooms[i].free) {
@@ -48,7 +54,7 @@ class HotelService {
     }
 
     async deleteHotel(hotelId) {
-        const result = await Hotel.delete(hotelId);
+        const result = await hotelRepository.delete(hotelId);
         return result;
     }
 }

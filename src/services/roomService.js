@@ -14,7 +14,7 @@ class RoomService {
     }
 
     async getRoomById(id) {
-        const result = await Room.findById(id);
+        const result = await Room.findRoomById(id);
         return result;
     }
 
@@ -24,9 +24,13 @@ class RoomService {
     }
 
     async getHotelByRoomlId(roomId) {
-        const hotelId = await Room.findRoomById(roomId).hotelId;
+        const hotelId = (await Room.findRoomById(roomId)).hotelId;
         const result = await Hotel.getHotelById(hotelId);
         return result;
+    }
+
+    async addBookingByRoomId() {
+        //loading...
     }
 
     async getBookingByRoomId(roomId) {

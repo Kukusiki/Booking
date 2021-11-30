@@ -40,3 +40,15 @@ Review.belongsTo(Hotel, { foreignKey: 'hotel_id' });
 //room <- booking
 Room.hasMany(Booking, { foreignKey: 'room_id' });
 Booking.belongsTo(Room, { foreignKey: 'room_id' });
+
+
+module.exports = {
+    User,
+    UserInfo,
+    UserRole,
+    Role,
+    Room,
+    Review,
+    Hotel,
+    Booking
+};
