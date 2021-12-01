@@ -1,9 +1,13 @@
 const Sequelize = require('sequelize');
+const env = require('../env');
 
-const sequelize = new Sequelize('booking', 'root', '1111', {
-    host: '127.0.0.1',
-    port: '3306',
-    dialect: 'mysql'
-});
+const sequelize = new Sequelize(
+    env.db.name,
+    env.db.user,
+    env.db.pass, {
+        host: env.db.host,
+        port: env.db.port,
+        dialect: 'mysql'
+    });
 
 module.exports = sequelize;

@@ -9,7 +9,7 @@ const UserInfo = sequelize.define('user_info', {
         allowNull: false,
         field: 'id',
     },
-    userID: {
+    userId: {
         type: Sequelize.BIGINT,
         allowNull: false,
         field: 'user_id',
