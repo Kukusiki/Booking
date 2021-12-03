@@ -2,11 +2,6 @@ const roomModels = require('../models/room');
 
 class RoomRepository {
 
-    async create(hotelId, photo, type, cost, free) {
-        const result = await roomModels.create({ hotelId, photo, type, cost, free });
-        return result;
-    }
-
     async create(room) {
         const result = await roomModels.create(room);
         return result;

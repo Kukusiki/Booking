@@ -5,22 +5,6 @@ class RoomController {
 
     async addRoom(req, res, next) {
         try {
-            const { hotelId, photo, type, cost, free } = req.body;
-            const hotel = await hotelService.getHotelById(hotelId);
-            if (!hotel) {
-                return next(new AppError('Hotel not found', 404));
-            }
-
-            await roomService.addRoom(hotelId, photo, type, cost, free);
-            res.json({ message: 'Room created successfully', status: 201 });
-
-        } catch (err) {
-            next(err);
-        }
-    }
-
-    async addRoom(req, res, next) {
-        try {
             const room = req.param;
             const hotel = await hotelService.getHotelById(room.hotelId);
             if (!hotel) {

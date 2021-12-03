@@ -4,17 +4,6 @@ class HotelController {
 
     async addHotel(req, res, next) {
         try {
-            const { name, photo, description } = req.body;
-            await hotelService.addHotel(name, photo, description);
-            res.json({ message: 'Hotel created successfully', status: 201 });
-
-        } catch (err) {
-            next(err);
-        }
-    }
-
-    async addHotel(req, res, next) {
-        try {
             const hotel = req.param;
             await hotelService.addHotel(hotel);
             res.json({ message: 'Hotel created successfully', status: 201 });

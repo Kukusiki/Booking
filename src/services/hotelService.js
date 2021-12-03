@@ -3,11 +3,6 @@ const roomRepository = require('../repositories/roomRepository');
 
 class HotelService {
 
-    async addHotel(name, photo, description) {
-        const result = await hotelRepository.create(name, photo, description);
-        return result;
-    }
-
     async addHotel(hotel) {
         const result = await hotelRepository.create(hotel);
         return result;
