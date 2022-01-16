@@ -3,6 +3,7 @@ const reviewRepository = require('../repositories/reviewRepository');
 const bookingRepository = require('../repositories/bookingRepository');
 const userInfoRepository = require('../repositories/userInfoRepository');
 const userRoleRepository = require('../repositories/userRoleRepository');
+const NotFoundError = require('../utils/notFoundError');
 
 class UserService {
 
@@ -15,7 +16,7 @@ class UserService {
     async getUserById(userId) {
         const result = await userRepository.findUserById(userId);
         if (!result) {
-            throw new Error('User not found');
+            throw new NotFoundError('User not found');
         }
         return result;
     }

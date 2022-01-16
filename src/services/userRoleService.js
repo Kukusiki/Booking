@@ -1,18 +1,19 @@
 const userRoleRepository = require('../repositories/userRoleRepository');
 const userRepository = require('../repositories/userRepository');
 const roleRepository = require('../repositories/roleRepository');
+const NotFoundError = require('../utils/notFoundError');
 
 class UserRoleService {
 
     async addUserRole(userRole) {
         const user = await userRepository.findUserById(userRole.userId);
         if (!user) {
-            throw new Error('User not found');
+            throw new NotFoundError('User not found');
         }
 
         const role = await roleRepository.findRoleById(userRole.roleId);
         if (!role) {
-            throw new Error('Role not found');
+            throw new NotFoundError('Role not found');
         }
 
         const result = await userRoleRepository.create(userRole);
@@ -23,7 +24,7 @@ class UserRoleService {
     async getUserRoleById(userRoleId) {
         const result = await userRoleRepository.findUserRoleById(userRoleId);
         if (!result) {
-            throw new Error('UserRole not found');
+            throw new NotFoundError('UserRole not found');
         }
         return result;
     }
@@ -41,7 +42,7 @@ class UserRoleService {
 
         const result = await userRepository.findUserById(userId);
         if (!result) {
-            throw new Error('User not found');
+            throw new NotFoundError('User not found');
         }
         return result;
     }
@@ -53,7 +54,7 @@ class UserRoleService {
 
         const result = await roleRepository.findRoleById(roleId);
         if (!result) {
-            throw new Error('Role not found');
+            throw new NotFoundError('Role not found');
         }
         return result;
     }

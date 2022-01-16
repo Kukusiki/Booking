@@ -1,6 +1,7 @@
 const hotelRepository = require('../repositories/hotelRepository');
 const roomRepository = require('../repositories/roomRepository');
 const reviewRepository = require('../repositories/reviewRepository');
+const NotFoundError = require('../utils/notFoundError');
 
 class HotelService {
 
@@ -13,7 +14,7 @@ class HotelService {
     async getHotelById(hotelId) {
         const result = await hotelRepository.findHotelById(hotelId);
         if (!result) {
-            throw new Error('Hotel not found');
+            throw new NotFoundError('Hotel not found');
         }
         return result;
     }

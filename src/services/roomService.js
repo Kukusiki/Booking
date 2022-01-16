@@ -1,13 +1,14 @@
 const roomRepository = require('../repositories/roomRepository');
 const hotelRepository = require('../repositories/hotelRepository');
 const bookingRepository = require('../repositories/bookingRepository');
+const NotFoundError = require('../utils/notFoundError');
 
 class RoomService {
 
     async addRoom(room) {
         const hotel = await hotelRepository.findHotelById(room.hotelId);
         if (!hotel) {
-            throw new Error('Hotel not found');
+            throw new NotFoundError('Hotel not found');
         }
 
         const result = await roomRepository.create(room);
@@ -18,7 +19,7 @@ class RoomService {
     async getRoomById(roomId) {
         const result = await roomRepository.findRoomById(roomId);
         if (!result) {
-            throw new Error('Room not found');
+            throw new NotFoundError('Room not found');
         }
         return result;
     }
@@ -36,7 +37,7 @@ class RoomService {
 
         const result = await hotelRepository.findHotelById(hotelId);
         if (!result) {
-            throw new Error('Hotel not found');
+            throw new NotFoundError('Hotel not found');
         }
         return result;
     }

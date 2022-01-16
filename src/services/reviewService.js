@@ -1,18 +1,19 @@
 const reviewRepository = require('../repositories/reviewRepository');
 const hotelRepository = require('../repositories/hotelRepository');
 const userRepository = require('../repositories/userRepository');
+const NotFoundError = require('../utils/notFoundError');
 
 class ReviewService {
 
     async addReview(review) {
         const hotel = await hotelRepository.findHotelById(review.hotelId);
         if (!hotel) {
-            throw new Error('Hotel not found');
+            throw new NotFoundError('Hotel not found');
         }
 
         const user = await userRepository.findUserById(review.userId);
         if (!user) {
-            throw new Error('User not found');
+            throw new NotFoundError('User not found');
         }
 
         const result = await reviewRepository.create(review);
@@ -23,7 +24,7 @@ class ReviewService {
     async getReviewById(reviewId) {
         const result = await reviewRepository.findReviewById(reviewId);
         if (!result) {
-            throw new Error('Review not found');
+            throw new NotFoundError('Review not found');
         }
         return result;
     }
@@ -41,7 +42,7 @@ class ReviewService {
 
         const result = await hotelRepository.findHotelById(hotelId);
         if (!result) {
-            throw new Error('Hotel not found');
+            throw new NotFoundError('Hotel not found');
         }
         return result;
     }
@@ -53,7 +54,7 @@ class ReviewService {
 
         const result = await userRepository.findUserById(userId);
         if (!result) {
-            throw new Error('User not found');
+            throw new NotFoundError('User not found');
         }
         return result;
     }

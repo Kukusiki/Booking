@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 router.use(bodyParser.json());
+const error = require('../middleware/error');
 
 
 const bookingRouter = require('../routes/bookingRouter');
@@ -22,5 +23,6 @@ router.use('/rooms', roomRouter);
 router.use('/userInfos', userInfoRouter);
 router.use('/userRoles', userRoleRouter);
 router.use('/users', userRouter);
+router.use(error);
 
 module.exports = router;

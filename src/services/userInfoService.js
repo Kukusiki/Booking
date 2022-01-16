@@ -1,13 +1,13 @@
 const userInfoRepository = require('../repositories/userInfoRepository');
 const userRepository = require('../repositories/userRepository');
-
+const NotFoundError = require('../utils/notFoundError');
 
 class UserInfoService {
 
     async addUserInfo(userInfo) {
         const user = await userRepository.findUserById(userInfo.userId);
         if (!user) {
-            throw new Error('User not found');
+            throw new NotFoundError('User not found');
         }
 
         const result = await userInfoRepository.create(userInfo);
@@ -18,7 +18,7 @@ class UserInfoService {
     async getUserInfoById(userInfoId) {
         const result = await userInfoRepository.findUserById(userInfoId);
         if (!result) {
-            throw new Error('UserInfo not found');
+            throw new NotFoundError('UserInfo not found');
         }
         return result;
     }
@@ -36,7 +36,7 @@ class UserInfoService {
 
         const result = await userRepository.findUserById(userId);
         if (!result) {
-            throw new Error('User not found');
+            throw new NotFoundError('User not found');
         }
         return result;
     }

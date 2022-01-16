@@ -1,5 +1,6 @@
 const roleRepository = require('../repositories/roleRepository');
 const userRoleRepository = require('../repositories/userRoleRepository');
+const NotFoundError = require('../utils/notFoundError');
 
 class RoleService {
 
@@ -12,7 +13,7 @@ class RoleService {
     async getRoleById(roleId) {
         const result = await roleRepository.findRoleById(roleId);
         if (!result) {
-            throw new Error('Role not found');
+            throw new NotFoundError('Role not found');
         }
         return result;
     }
