@@ -1,0 +1,54 @@
+const userInfoRepository = require('../repositories/userInfoRepository');
+const userRepository = require('../repositories/userRepository');
+
+
+class UserInfoService {
+
+    async addUserInfo(userInfo) {
+        const user = await userRepository.findUserById(userInfo.userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        const result = await userInfoRepository.create(userInfo);
+        return result;
+    }
+
+
+    async getUserInfoById(userInfoId) {
+        const result = await userInfoRepository.findUserById(userInfoId);
+        if (!result) {
+            throw new Error('UserInfo not found');
+        }
+        return result;
+    }
+
+
+    async getAllUserInfos() {
+        const result = await userInfoRepository.findAll();
+        return result;
+    }
+
+
+    async getUserByUserInfoId(userInfoId) {
+        const userInfo = await this.getUserInfoById(userInfoId);
+        const userId = userInfo.userId;
+
+        const result = await userRepository.findUserById(userId);
+        if (!result) {
+            throw new Error('User not found');
+        }
+        return result;
+    }
+
+
+    async deleteUserInfo(userInfoId) {
+        await this.getUserInfoById(userInfoId);
+
+        const result = await userInfoRepository.delete(userInfoId);
+        return result;
+    }
+
+}
+
+module.exports = new UserInfoService();

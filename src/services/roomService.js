@@ -1,39 +1,59 @@
-const Room = require('../repositories/roomRepository');
-const Hotel = require('./hotelService');
+const roomRepository = require('../repositories/roomRepository');
+const hotelRepository = require('../repositories/hotelRepository');
+const bookingRepository = require('../repositories/bookingRepository');
 
 class RoomService {
 
     async addRoom(room) {
-        const result = await Room.create(room);
+        const hotel = await hotelRepository.findHotelById(room.hotelId);
+        if (!hotel) {
+            throw new Error('Hotel not found');
+        }
+
+        const result = await roomRepository.create(room);
         return result;
     }
 
-    async getRoomById(id) {
-        const result = await Room.findRoomById(id);
+
+    async getRoomById(roomId) {
+        const result = await roomRepository.findRoomById(roomId);
+        if (!result) {
+            throw new Error('Room not found');
+        }
         return result;
     }
+
 
     async getAllRooms() {
-        const result = await Room.findAll();
+        const result = await roomRepository.findAll();
         return result;
     }
 
-    async getHotelByRoomlId(roomId) {
-        const hotelId = (await Room.findRoomById(roomId)).hotelId;
-        const result = await Hotel.getHotelById(hotelId);
+
+    async getHotelByRoomId(roomId) {
+        const room = await this.getRoomById(roomId);
+        const hotelId = room.hotelId;
+
+        const result = await hotelRepository.findHotelById(hotelId);
+        if (!result) {
+            throw new Error('Hotel not found');
+        }
         return result;
     }
 
-    async addBookingByRoomId() {
-        //loading...
+
+    async getBookingsByRoomId(roomId) {
+        await this.getRoomById(roomId);
+
+        const result = await bookingRepository.findBookingsByRoomId(roomId);
+        return result;
     }
 
-    async getBookingByRoomId(roomId) {
-        //loading...
-    }
 
     async deleteRoom(roomId) {
-        const result = await Room.delete(roomId);
+        await this.getRoomById(roomId);
+
+        const result = await roomRepository.delete(roomId);
         return result;
     }
 
