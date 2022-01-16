@@ -1,82 +1,52 @@
 const roomService = require('../services/roomService');
-const hotelService = require('../services/hotelService');
+const code = require('http-status-codes').StatusCodes;
 
 class RoomController {
 
     async addRoom(req, res, next) {
-        try {
-            const room = req.param;
-            const hotel = await hotelService.getHotelById(room.hotelId);
-            if (!hotel) {
-                return next(new AppError('Hotel not found', 404));
-            }
+        const room = req.body;
+        await roomService.addRoom(room);
 
-            await roomService.addRoom(hotel);
-            res.json({ message: 'Room created successfully', status: 201 });
-
-        } catch (err) {
-            next(err);
-        }
+        res.status(code.CREATED).json({ message: 'Room created successfully' });
     }
+
 
     async getRoomById(req, res, next) {
-        try {
-            const roomId = req.param;
-            const room = await roomService.getRoomById(roomId);
-            if (!room) {
-                return next(new AppError('Room not found', 404));
-            }
-            res.json({ message: room, status: 200 });
+        const roomId = req.params.id;
+        const room = await roomService.getRoomById(roomId);
 
-        } catch (err) {
-            next(err);
-        }
+        res.status(code.OK).json({ message: room });
     }
+
 
     async getAllRooms(req, res, next) {
-        try {
-            const rooms = await roomService.getAllRooms();
-            res.json({ message: rooms, status: 200 });
+        const rooms = await roomService.getAllRooms();
 
-        } catch (err) {
-            next(err);
-        }
+        res.status(code.OK).json({ message: rooms });
     }
 
-    async getHotelByRoomlId(req, res, next) {
-        try {
-            const roomId = req.param;
-            if (!await roomService.getRoomById(roomId)) {
-                return next(new AppError('Room not found', 404));
-            }
-            const hotel = roomService.getHotelByRoomlId(roomId);
-            res.json({ message: hotel, status: 200 });
 
-        } catch (err) {
-            next(err);
-        }
+    async getHotelByRoomId(req, res, next) {
+        const roomId = req.params.id;
+        const hotel = await roomService.getHotelByRoomId(roomId);
+
+        res.status(code.OK).json({ message: hotel });
     }
 
-    async addBookingByRoomId(req, res, next) {
-        //loading...
+
+    async getBookingsByRoomId(req, res, next) {
+        const roleId = req.params.id;
+        const bookings = await roomService.getBookingsByRoomId(roleId);
+
+        res.status(code.OK).json({ message: bookings });
     }
 
-    async getBookingByRoomId(req, res, next) {
-        //loading...
-    }
 
     async deleteRoom(req, res, next) {
-        try {
-            const roomId = req.param;
-            if (!await roomService.getRoomById(roomId)) {
-                return next(new AppError('Room not found', 404));
-            }
-            const numberOfRooms = roomService.deleteRoom(roomId);
-            res.json({ message: numberOfRooms, status: 200 });
+        const roomId = req.params.id;
+        const numberOfRooms = await roomService.deleteRoom(roomId);
 
-        } catch (err) {
-            next(err);
-        }
+        res.status(code.OK).json({ message: numberOfRooms });
     }
 
 }
