@@ -3,18 +3,13 @@ const Hotel = require('./hotelService');
 
 class RoomService {
 
-    async addRoom(hotelId, photo, type, cost, free) {
-        const result = await Room.create(hotelId, photo, type, cost, free);
-        return result;
-    }
-
     async addRoom(room) {
         const result = await Room.create(room);
         return result;
     }
 
     async getRoomById(id) {
-        const result = await Room.findById(id);
+        const result = await Room.findRoomById(id);
         return result;
     }
 
@@ -24,9 +19,13 @@ class RoomService {
     }
 
     async getHotelByRoomlId(roomId) {
-        const hotelId = await Room.findRoomById(roomId).hotelId;
+        const hotelId = (await Room.findRoomById(roomId)).hotelId;
         const result = await Hotel.getHotelById(hotelId);
         return result;
+    }
+
+    async addBookingByRoomId() {
+        //loading...
     }
 
     async getBookingByRoomId(roomId) {
