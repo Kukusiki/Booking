@@ -22,8 +22,8 @@ class UserService {
     }
 
 
-    async getAllUsers() {
-        const result = await userRepository.findAll();
+    async getAllUsers(page) {
+        const result = await userRepository.findAll(page);
         return result;
     }
 

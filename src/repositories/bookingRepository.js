@@ -1,4 +1,6 @@
 const bookingModel = require('../models/booking');
+const pageSize = require('../const').PAGE_SIZE;
+const NotFoundError = require('../utils/notFoundError');
 
 class BookingRepository {
 
@@ -7,7 +9,20 @@ class BookingRepository {
         return result;
     }
 
-    async findAll() {
+    async findAll(page) {
+        if (page !== undefined) {
+            const { count, rows } = await bookingModel.findAndCountAll({
+                offset: pageSize * (page - 1),
+                limit: pageSize
+            });
+
+            if (pageSize * (page - 1) > count) {
+                throw new NotFoundError('There is nothing on this page');
+            }
+
+            return rows;
+        }
+
         const result = await bookingModel.findAll();
         return result;
     }

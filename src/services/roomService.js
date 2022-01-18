@@ -25,8 +25,8 @@ class RoomService {
     }
 
 
-    async getAllRooms() {
-        const result = await roomRepository.findAll();
+    async getAllRooms(page) {
+        const result = await roomRepository.findAll(page);
         return result;
     }
 

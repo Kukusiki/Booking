@@ -20,7 +20,8 @@ class HotelController {
 
 
     async getAllHotels(req, res, next) {
-        const hotels = await hotelService.getAllHotels();
+        const page = req.params.page;
+        const hotels = await hotelService.getAllHotels(page);
 
         res.status(code.OK).json({ message: hotels });
     }

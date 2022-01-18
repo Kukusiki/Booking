@@ -20,7 +20,8 @@ class UserController {
 
 
     async getAllUsers(req, res, next) {
-        const users = await userService.getAllUsers();
+        const page = req.params.page;
+        const users = await userService.getAllUsers(page);
 
         res.status(code.OK).json({ message: users });
     }

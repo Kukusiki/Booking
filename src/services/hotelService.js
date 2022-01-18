@@ -20,8 +20,8 @@ class HotelService {
     }
 
 
-    async getAllHotels() {
-        const result = await hotelRepository.findAll();
+    async getAllHotels(page) {
+        const result = await hotelRepository.findAll(page);
         return result;
     }
 

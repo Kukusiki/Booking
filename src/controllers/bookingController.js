@@ -20,7 +20,8 @@ class BookingController {
 
 
     async getAllBookings(req, res, next) {
-        const booking = await bookingService.getAllBookings();
+        const page = req.params.page;
+        const booking = await bookingService.getAllBookings(page);
 
         res.status(code.OK).json({ message: booking });
     }

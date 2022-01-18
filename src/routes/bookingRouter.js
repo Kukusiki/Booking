@@ -10,6 +10,7 @@ const tryCatch = require('../utils/tryCatch');
 //router.use(user);
 router.get('/:id', tryCatch(bookingController.getBookingById));
 router.get('/', tryCatch(bookingController.getAllBookings));
+router.get('/&p=/:page', tryCatch(bookingController.getAllBookings));
 router.get('/:id/room', tryCatch(bookingController.getRoomByBookingId));
 router.get('/:id/user', tryCatch(bookingController.getUserByBookingId));
 

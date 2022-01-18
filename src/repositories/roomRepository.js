@@ -1,4 +1,6 @@
 const roomModels = require('../models/room');
+const pageSize = require('../const').PAGE_SIZE;
+const NotFoundError = require('../utils/notFoundError');
 
 class RoomRepository {
 
@@ -7,7 +9,20 @@ class RoomRepository {
         return result;
     }
 
-    async findAll() {
+    async findAll(page) {
+        if (page !== undefined) {
+            const { count, rows } = await roomModels.findAndCountAll({
+                offset: pageSize * (page - 1),
+                limit: pageSize
+            });
+
+            if (pageSize * (page - 1) > count) {
+                throw new NotFoundError('There is nothing on this page');
+            }
+
+            return rows;
+        }
+
         const result = await roomModels.findAll();
         return result;
     }

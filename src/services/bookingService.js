@@ -30,8 +30,8 @@ class BookingService {
     }
 
 
-    async getAllBookings() {
-        const result = await bookingRepository.findAll();
+    async getAllBookings(page) {
+        const result = await bookingRepository.findAll(page);
         return result;
     }
 

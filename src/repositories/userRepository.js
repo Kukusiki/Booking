@@ -1,4 +1,6 @@
 const userModel = require('../models/user');
+const pageSize = require('../const').PAGE_SIZE;
+const NotFoundError = require('../utils/notFoundError');
 
 class UserRepository {
 
@@ -7,7 +9,20 @@ class UserRepository {
         return result;
     }
 
-    async findAll() {
+    async findAll(page) {
+        if (page !== undefined) {
+            const { count, rows } = await userModel.findAndCountAll({
+                offset: pageSize * (page - 1),
+                limit: pageSize
+            });
+
+            if (pageSize * (page - 1) > count) {
+                throw new NotFoundError('There is nothing on this page');
+            }
+
+            return rows;
+        }
+
         const result = await userModel.findAll();
         return result;
     }

@@ -20,7 +20,8 @@ class RoomController {
 
 
     async getAllRooms(req, res, next) {
-        const rooms = await roomService.getAllRooms();
+        const page = req.params.page;
+        const rooms = await roomService.getAllRooms(page);
 
         res.status(code.OK).json({ message: rooms });
     }
