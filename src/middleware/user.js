@@ -1,4 +1,4 @@
-const user = require('../const').user;
+const user = require('../const').USER;
 
 module.exports = (req, res, next) => {
     if (req.session.role == user) {

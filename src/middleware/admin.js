@@ -1,4 +1,4 @@
-const admin = require('../const').admin;
+const admin = require('../const').ADMIN;
 
 module.exports = (req, res, next) => {
     if (req.session.role == admin) {

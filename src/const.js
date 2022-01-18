@@ -1,6 +1,7 @@
 const constants = {
-    user: 0,
-    admin: 1
+    USER: 0,
+    ADMIN: 1,
+    PAGE_SIZE: 3
 }
 
 module.exports = constants;
