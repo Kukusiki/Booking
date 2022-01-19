@@ -1,5 +1,5 @@
 const hotelService = require('../services/hotelService');
-const code = require('http-status-codes').StatusCodes;
+const StatuseCodes = require('http-status-codes').StatusCodes;
 
 class HotelController {
 
@@ -7,7 +7,7 @@ class HotelController {
         const hotel = req.body;
         await hotelService.addHotel(hotel);
 
-        res.status(code.CREATED).json({ message: 'Hotel created successfully' });
+        res.status(StatuseCodes.CREATED).json({ message: 'Hotel created successfully' });
     }
 
 
@@ -15,15 +15,18 @@ class HotelController {
         const hotelId = req.params.id;
         const hotel = await hotelService.getHotelById(hotelId);
 
-        res.status(code.OK).json({ message: hotel });
+        res.status(StatuseCodes.OK).json({ message: hotel });
     }
 
 
     async getAllHotels(req, res, next) {
-        const page = req.params.page;
+        let page = req.query.page;
+        if (!page) {
+            page = 1;
+        }
         const hotels = await hotelService.getAllHotels(page);
 
-        res.status(code.OK).json({ message: hotels });
+        res.status(StatuseCodes.OK).json({ message: hotels });
     }
 
 
@@ -31,7 +34,7 @@ class HotelController {
         const hotelId = req.params.id;
         const rooms = await hotelService.getRoomsByHotelId(hotelId);
 
-        res.status(code.OK).json({ message: rooms });
+        res.status(StatuseCodes.OK).json({ message: rooms });
     }
 
 
@@ -39,7 +42,7 @@ class HotelController {
         const hotelId = req.params.id;
         const rooms = await hotelService.getFreeRoomsByHotelId(hotelId);
 
-        res.status(code.OK).json({ message: rooms });
+        res.status(StatuseCodes.OK).json({ message: rooms });
     }
 
 
@@ -47,7 +50,7 @@ class HotelController {
         const hotelId = req.params.id;
         const reviews = await hotelService.getReviewsByHotelId(hotelId);
 
-        res.status(code.OK).json({ message: reviews });
+        res.status(StatuseCodes.OK).json({ message: reviews });
     }
 
 
@@ -55,7 +58,7 @@ class HotelController {
         const hotelId = req.params.id;
         const numberOfHotels = await hotelService.deleteHotel(hotelId);
 
-        res.status(code.OK).json({ message: numberOfHotels });
+        res.status(StatuseCodes.OK).json({ message: numberOfHotels });
     }
 
 }

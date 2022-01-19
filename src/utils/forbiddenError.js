@@ -1,10 +1,10 @@
 const StatuseCodes = require('http-status-codes').StatusCodes;
 
-class NotFoundError extends Error {
+class ForbiddenError extends Error {
     constructor(message) {
         super(message);
-        this.status = StatuseCodes.NOT_FOUND;
+        this.status = StatuseCodes.FORBIDDEN;
     }
 }
 
-module.exports = NotFoundError;
+module.exports = ForbiddenError;

@@ -38,11 +38,12 @@ class HotelService {
         const hotelRooms = await this.getRoomsByHotelId(hotelId);
 
         let result = [];
-        for (let i = 0; i < hotelRooms.length; i++) {
-            if (hotelRooms[i].free) {
-                result.push(hotelRooms[i]);
+        hotelRooms.forEach(hotel => {
+            if (hotel.free) {
+                result.push(hotel);
             }
-        }
+        });
+
         return result;
     }
 

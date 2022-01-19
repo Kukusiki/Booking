@@ -1,5 +1,5 @@
 const userService = require('../services/userService');
-const code = require('http-status-codes').StatusCodes;
+const StatuseCodes = require('http-status-codes').StatusCodes;
 
 class UserController {
 
@@ -7,7 +7,7 @@ class UserController {
         const user = req.body;
         await userService.addUser(user);
 
-        res.status(code.CREATED).json({ message: 'User created successfully' });
+        res.status(StatuseCodes.CREATED).json({ message: 'User created successfully' });
     }
 
 
@@ -15,15 +15,18 @@ class UserController {
         const userId = req.params.id;
         const user = await userService.getUserById(userId);
 
-        res.status(code.OK).json({ message: user });
+        res.status(StatuseCodes.OK).json({ message: user });
     }
 
 
     async getAllUsers(req, res, next) {
-        const page = req.params.page;
+        let page = req.query.page;
+        if (!page) {
+            page = 1;
+        }
         const users = await userService.getAllUsers(page);
 
-        res.status(code.OK).json({ message: users });
+        res.status(StatuseCodes.OK).json({ message: users });
     }
 
 
@@ -31,7 +34,7 @@ class UserController {
         const userId = req.params.id;
         const booking = await userService.getBookingsByUserId(userId);
 
-        res.status(code.OK).json({ message: booking });
+        res.status(StatuseCodes.OK).json({ message: booking });
     }
 
 
@@ -39,7 +42,7 @@ class UserController {
         const userId = req.params.id;
         const reviews = await userService.getReviewsByUserId(userId);
 
-        res.status(code.OK).json({ message: reviews });
+        res.status(StatuseCodes.OK).json({ message: reviews });
     }
 
 
@@ -47,7 +50,7 @@ class UserController {
         const userId = req.params.id;
         const userInfo = await userService.getUserInfoByUserId(userId);
 
-        res.status(code.OK).json({ message: userInfo });
+        res.status(StatuseCodes.OK).json({ message: userInfo });
     }
 
 
@@ -55,7 +58,7 @@ class UserController {
         const userId = req.params.id;
         const userRole = await userService.getUserRoleByUserId(userId);
 
-        res.status(code.OK).json({ message: userRole });
+        res.status(StatuseCodes.OK).json({ message: userRole });
     }
 
 
@@ -63,7 +66,7 @@ class UserController {
         const userId = req.params.id;
         const numberOfUsers = await userService.deleteUser(userId);
 
-        res.status(code.OK).json({ message: numberOfUsers });
+        res.status(StatuseCodes.OK).json({ message: numberOfUsers });
     }
 
 }

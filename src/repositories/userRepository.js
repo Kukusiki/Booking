@@ -10,21 +10,12 @@ class UserRepository {
     }
 
     async findAll(page) {
-        if (page !== undefined) {
-            const { count, rows } = await userModel.findAndCountAll({
-                offset: pageSize * (page - 1),
-                limit: pageSize
-            });
+        const { count, rows } = await userModel.findAndCountAll({
+            offset: pageSize * (page - 1),
+            limit: pageSize
+        });
 
-            if (pageSize * (page - 1) > count) {
-                throw new NotFoundError('There is nothing on this page');
-            }
-
-            return rows;
-        }
-
-        const result = await userModel.findAll();
-        return result;
+        return rows;
     }
 
     async findUserById(id) {

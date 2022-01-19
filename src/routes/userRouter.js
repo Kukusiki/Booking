@@ -10,7 +10,7 @@ const tryCatch = require('../utils/tryCatch');
 //router.use(user);
 router.get('/:id', tryCatch(userController.getUserById));
 router.get('/', tryCatch(userController.getAllUsers));
-router.get('/&p=/:page', tryCatch(userController.getAllUsers));
+router.get('/?page=page', tryCatch(userController.getAllUsers));
 router.get('/:id/bookings', tryCatch(userController.getBookingsByUserId));
 router.get('/:id/reviews', tryCatch(userController.getReviewsByUserId));
 router.get('/:id/userInfo', tryCatch(userController.getUserInfoByUserId));

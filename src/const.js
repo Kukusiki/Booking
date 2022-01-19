@@ -1,6 +1,7 @@
 const constants = {
-    USER: 0,
-    ADMIN: 1,
+    USER_ROLE: 0,
+    ADMIN_ROLE: 1,
+
     PAGE_SIZE: 3
 }
 

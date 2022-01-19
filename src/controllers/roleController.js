@@ -1,5 +1,5 @@
 const roleService = require('../services/roleService');
-const code = require('http-status-codes').StatusCodes;
+const StatuseCodes = require('http-status-codes').StatusCodes;
 
 class RoleController {
 
@@ -7,7 +7,7 @@ class RoleController {
         const role = req.body;
         await roleService.addRole(role);
 
-        res.status(code.CREATED).json({ message: 'Role created successfully' });
+        res.status(StatuseCodes.CREATED).json({ message: 'Role created successfully' });
     }
 
 
@@ -15,14 +15,14 @@ class RoleController {
         const roleId = req.params.id;
         const role = await roleService.getRoleById(roleId);
 
-        res.status(code.OK).json({ message: role });
+        res.status(StatuseCodes.OK).json({ message: role });
     }
 
 
     async getAllRoles(req, res, next) {
         const role = await roleService.getAllRoles();
 
-        res.status(code.OK).json({ message: role });
+        res.status(StatuseCodes.OK).json({ message: role });
     }
 
 
@@ -30,7 +30,7 @@ class RoleController {
         const roleId = req.params.id;
         const userRole = await roleService.getUserRoleByRoleId(roleId);
 
-        res.status(code.OK).json({ message: userRole });
+        res.status(StatuseCodes.OK).json({ message: userRole });
     }
 
 
@@ -38,7 +38,7 @@ class RoleController {
         const roleId = req.params.id;
         const numberOfRoles = await roleService.deleteRole(roleId);
 
-        res.status(code.OK).json({ message: numberOfRoles });
+        res.status(StatuseCodes.OK).json({ message: numberOfRoles });
     }
 
 }

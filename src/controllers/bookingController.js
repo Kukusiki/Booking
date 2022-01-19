@@ -1,5 +1,5 @@
 const bookingService = require('../services/bookingService');
-const code = require('http-status-codes').StatusCodes;
+const StatuseCodes = require('http-status-codes').StatusCodes;
 
 class BookingController {
 
@@ -7,7 +7,7 @@ class BookingController {
         const booking = req.body;
         await bookingService.addHotel(booking);
 
-        res.status(code.CREATED).json({ message: 'Booking created successfully' });
+        res.status(StatuseCodes.CREATED).json({ message: 'Booking created successfully' });
     }
 
 
@@ -15,15 +15,18 @@ class BookingController {
         const bookingId = req.params.id;
         const booking = await bookingService.getBookingById(bookingId);
 
-        res.status(code.OK).json({ message: booking });
+        res.status(StatuseCodes.OK).json({ message: booking });
     }
 
 
     async getAllBookings(req, res, next) {
-        const page = req.params.page;
+        let page = req.query.page;
+        if (!page) {
+            page = 1;
+        }
         const booking = await bookingService.getAllBookings(page);
 
-        res.status(code.OK).json({ message: booking });
+        res.status(StatuseCodes.OK).json({ message: booking });
     }
 
 
@@ -31,7 +34,7 @@ class BookingController {
         const bookingId = req.params.id;
         const room = await bookingService.getRoomByBookingId(bookingId);
 
-        res.status(code.OK).json({ message: room });
+        res.status(StatuseCodes.OK).json({ message: room });
     }
 
 
@@ -39,7 +42,7 @@ class BookingController {
         const bookingId = req.params.id;
         const user = await bookingService.getUserByBookingId(bookingId);
 
-        res.status(code.OK).json({ message: user });
+        res.status(StatuseCodes.OK).json({ message: user });
     }
 
 
@@ -47,7 +50,7 @@ class BookingController {
         const bookingId = req.params.id;
         const numberOfBookings = await bookingService.deleteBooking(bookingId);
 
-        res.status(code.OK).json({ message: numberOfBookings });
+        res.status(StatuseCodes.OK).json({ message: numberOfBookings });
     }
 
 }

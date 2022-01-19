@@ -1,5 +1,5 @@
 const reviewService = require('../services/reviewService');
-const code = require('http-status-codes').StatusCodes;
+const StatuseCodes = require('http-status-codes').StatusCodes;
 
 class ReviewController {
 
@@ -7,7 +7,7 @@ class ReviewController {
         const review = req.body;
         await reviewService.addReview(review);
 
-        res.status(code.CREATED).json({ message: 'Review created successfully' });
+        res.status(StatuseCodes.CREATED).json({ message: 'Review created successfully' });
     }
 
 
@@ -15,14 +15,14 @@ class ReviewController {
         const reviewId = req.params.id;
         const review = await reviewService.getReviewById(reviewId);
 
-        res.status(code.OK).json({ message: review });
+        res.status(StatuseCodes.OK).json({ message: review });
     }
 
 
     async getAllReviews(req, res, next) {
         const review = await reviewService.getAllReviews();
 
-        res.status(code.OK).json({ message: review });
+        res.status(StatuseCodes.OK).json({ message: review });
     }
 
 
@@ -30,7 +30,7 @@ class ReviewController {
         const reviewId = req.params.id;
         const hotel = await reviewService.getHotelByReviewId(reviewId);
 
-        res.status(code.OK).json({ message: hotel });
+        res.status(StatuseCodes.OK).json({ message: hotel });
     }
 
 
@@ -38,7 +38,7 @@ class ReviewController {
         const reviewId = req.params.id;
         const user = await reviewService.getUserByReviewId(reviewId);
 
-        res.status(code.OK).json({ message: user });
+        res.status(StatuseCodes.OK).json({ message: user });
     }
 
 
@@ -46,7 +46,7 @@ class ReviewController {
         const reviewId = req.params.id;
         const numberOfReviews = await reviewService.deleteReview(reviewId);
 
-        res.status(code.OK).json({ message: numberOfReviews });
+        res.status(StatuseCodes.OK).json({ message: numberOfReviews });
     }
 
 }
