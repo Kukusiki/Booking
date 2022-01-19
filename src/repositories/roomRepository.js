@@ -1,6 +1,5 @@
 const roomModels = require('../models/room');
 const pageSize = require('../const').PAGE_SIZE;
-const NotFoundError = require('../utils/notFoundError');
 
 class RoomRepository {
 

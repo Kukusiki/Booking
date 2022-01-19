@@ -1,6 +1,5 @@
 const userModel = require('../models/user');
 const pageSize = require('../const').PAGE_SIZE;
-const NotFoundError = require('../utils/notFoundError');
 
 class UserRepository {
 

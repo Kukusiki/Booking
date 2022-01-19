@@ -1,6 +1,5 @@
 const bookingModel = require('../models/booking');
 const pageSize = require('../const').PAGE_SIZE;
-const NotFoundError = require('../utils/notFoundError');
 
 class BookingRepository {
 
