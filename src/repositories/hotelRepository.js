@@ -8,6 +8,11 @@ class HotelRepository {
         return result;
     }
 
+    async update({ hotelId, file }) {
+        const result = await hotelModel.update({ photo: file.path }, { where: { id: hotelId } });
+        return result;
+    }
+
     async findAll(page) {
         const { count, rows } = await hotelModel.findAndCountAll({
             offset: pageSize * (page - 1),

@@ -11,6 +11,16 @@ class RoomController {
     }
 
 
+    async addPhoto(req, res, next) {
+        const roomId = req.params.id;
+        const file = req.file;
+
+        await roomService.addPhoto({ roomId, file });
+
+        res.status(StatuseCodes.CREATED).json({ message: 'Room\'s photo add successfully' });
+    }
+
+
     async getRoomById(req, res, next) {
         const roomId = req.params.id;
         const room = await roomService.getRoomById(roomId);

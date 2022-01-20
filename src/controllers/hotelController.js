@@ -11,6 +11,16 @@ class HotelController {
     }
 
 
+    async addPhoto(req, res, next) {
+        const hotelId = req.params.id;
+        const file = req.file;
+
+        await hotelService.addPhoto({ hotelId, file });
+
+        res.status(StatuseCodes.CREATED).json({ message: 'Hotel\'s photo add successfully' });
+    }
+
+
     async getHotelById(req, res, next) {
         const hotelId = req.params.id;
         const hotel = await hotelService.getHotelById(hotelId);

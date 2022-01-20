@@ -7,6 +7,11 @@ class UserInfoRepository {
         return result;
     }
 
+    async update({ userInfoId, file }) {
+        const result = await userInfoModel.update({ photo: file.path }, { where: { id: userInfoId } });
+        return result;
+    }
+
     async findAll() {
         const result = await userInfoModel.findAll();
         return result;

@@ -2,11 +2,23 @@ const hotelRepository = require('../repositories/hotelRepository');
 const roomRepository = require('../repositories/roomRepository');
 const reviewRepository = require('../repositories/reviewRepository');
 const NotFoundError = require('../utils/notFoundError');
+const BadRequestError = require('../utils/badRequestError');
 
 class HotelService {
 
     async addHotel(hotel) {
         const result = await hotelRepository.create(hotel);
+        return result;
+    }
+
+
+    async addPhoto({ hotelId, file }) {
+        await this.getHotelById(hotelId);
+        if (!file) {
+            throw new BadRequestError('File not found');
+        }
+
+        const result = await hotelRepository.update({ hotelId, file });
         return result;
     }
 

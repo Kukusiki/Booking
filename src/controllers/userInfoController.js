@@ -11,6 +11,16 @@ class UserInfoController {
     }
 
 
+    async addPhoto(req, res, next) {
+        const userInfoId = req.params.id;
+        const file = req.file;
+
+        await userInfoService.addPhoto({ userInfoId, file });
+
+        res.status(StatuseCodes.CREATED).json({ message: 'UserInfo\'s photo add successfully' });
+    }
+
+
     async getUserInfoById(req, res, next) {
         const userInfoId = req.params.id;
         const userInfo = await userInfoService.getUserInfoById(userInfoId);

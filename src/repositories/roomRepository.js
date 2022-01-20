@@ -8,6 +8,11 @@ class RoomRepository {
         return result;
     }
 
+    async update({ roomId, file }) {
+        const result = await roomModels.update({ photo: file.path }, { where: { id: roomId } });
+        return result;
+    }
+
     async findAll(page) {
         const { count, rows } = await roomModels.findAndCountAll({
             offset: pageSize * (page - 1),
