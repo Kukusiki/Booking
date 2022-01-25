@@ -1,8 +1,10 @@
 const constants = {
-    USER_ROLE: 0,
-    ADMIN_ROLE: 1,
+    USER_ROLE: 'user',
+    ADMIN_ROLE: 'admin',
 
-    PAGE_SIZE: 100
+    PAGE_SIZE: 100,
+
+    SECRET_TOKEN: 'BOOP'
 }
 
 module.exports = constants;

@@ -11,6 +11,14 @@ class UserController {
     }
 
 
+    async addAdminByUserId(req, res, next) {
+        const userId = req.params.id;
+        await userService.addAdminByUserId(userId);
+
+        res.status(StatuseCodes.CREATED).json({ message: 'Admin created successfully' });
+    }
+
+
     async getUserById(req, res, next) {
         const userId = req.params.id;
         const user = await userService.getUserById(userId);
@@ -21,9 +29,6 @@ class UserController {
 
     async getAllUsers(req, res, next) {
         let page = req.query.page;
-        if (!page) {
-            page = 1;
-        }
         const users = await userService.getAllUsers(page);
 
         res.status(StatuseCodes.OK).json({ message: users });

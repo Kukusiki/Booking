@@ -31,9 +31,6 @@ class RoomController {
 
     async getAllRooms(req, res, next) {
         let page = req.query.page;
-        if (!page) {
-            page = 1;
-        }
         const rooms = await roomService.getAllRooms(page);
 
         res.status(StatuseCodes.OK).json({ message: rooms });

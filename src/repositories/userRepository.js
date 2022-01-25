@@ -17,6 +17,11 @@ class UserRepository {
         return rows;
     }
 
+    async findUserByEmail(email) {
+        const result = await userModel.findOne({ where: { email } });
+        return result;
+    }
+
     async findUserById(id) {
         const result = await userModel.findByPk(id);
         return result;

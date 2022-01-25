@@ -17,12 +17,12 @@ class UserRoleRepository {
         return result;
     }
 
-    async findUserRoleByUserId(userId) {
+    async findUserRolesByUserId(userId) {
         const result = await userRoleModel.findAll({ where: { userId } });
         return result;
     }
 
-    async findUserRoleByRoleId(roleId) {
+    async findUserRolesByRoleId(roleId) {
         const result = await userRoleModel.findAll({ where: { roleId } });
         return result;
     }

@@ -32,7 +32,7 @@ class HotelService {
     }
 
 
-    async getAllHotels(page) {
+    async getAllHotels(page = 1) {
         const result = await hotelRepository.findAll(page);
         return result;
     }

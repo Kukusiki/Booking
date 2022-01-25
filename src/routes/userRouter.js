@@ -17,6 +17,7 @@ router.get('/:id/userRole', tryCatch(userController.getUserRoleByUserId));
 
 //router.use(admin);
 router.post('/', tryCatch(userController.addUser));
+router.post('/:id', tryCatch(userController.addAdminByUserId));
 router.delete('/:id', tryCatch(userController.deleteUser));
 
 module.exports = router;

@@ -17,6 +17,11 @@ class RoleRepository {
         return result;
     }
 
+    async findRoleByName(name) {
+        const result = await roleModel.findOne({ where: { name } });
+        return result;
+    }
+
     async delete(id) {
         const result = await roleModel.destroy({ where: { id } });
         return result;

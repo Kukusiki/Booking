@@ -21,9 +21,6 @@ class BookingController {
 
     async getAllBookings(req, res, next) {
         let page = req.query.page;
-        if (!page) {
-            page = 1;
-        }
         const booking = await bookingService.getAllBookings(page);
 
         res.status(StatuseCodes.OK).json({ message: booking });

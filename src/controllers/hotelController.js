@@ -31,9 +31,6 @@ class HotelController {
 
     async getAllHotels(req, res, next) {
         let page = req.query.page;
-        if (!page) {
-            page = 1;
-        }
         const hotels = await hotelService.getAllHotels(page);
 
         res.status(StatuseCodes.OK).json({ message: hotels });
