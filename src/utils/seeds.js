@@ -5,13 +5,10 @@ const userService = require('../services/userService');
 class Seeds {
 
     async createRoles() {
-        const names = [].slice.call(arguments);
+        const roles = [].slice.call(arguments);
 
-        names.forEach(async name => {
-            const role = await roleRepository.findRoleByName(name);
-            if (!role) {
-                await roleRepository.create({ name: name });
-            }
+        roles.forEach(async name => {
+            await roleRepository.findOrCreate({ where: { name: name } });
         });
     }
 

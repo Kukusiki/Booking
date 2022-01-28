@@ -17,6 +17,11 @@ class RoleRepository {
         return result;
     }
 
+    async findOrCreate(role) {
+        const result = await roleModel.findOrCreate(role);
+        return result;
+    }
+
     async findRoleByName(name) {
         const result = await roleModel.findOne({ where: { name } });
         return result;

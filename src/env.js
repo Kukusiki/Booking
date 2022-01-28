@@ -8,5 +8,12 @@ module.exports = {
         pass: process.env.DB_PASS || '1111',
         host: process.env.DB_HOST || '127.0.0.1',
         port: process.env.DB_PORT || '3306'
+    },
+    admin: {
+        email: process.env.ADMIN_EMAIL || 'aaa',
+        password: process.env.ADMIN_PASS || 'aaa'
+    },
+    token: {
+        secret: process.env.SECRET || 'aaa'
     }
 };

@@ -82,12 +82,6 @@ class UserService {
     }
 
 
-    // async getUserRoleByUserId(userId) {
-    //     const result = await this.getUserRolesByUserId(userId);
-    //     return result[0];
-    // }
-
-
     async getRolesByUserId(userId) {
         const userRoles = await this.getUserRolesByUserId(userId);
         const rolesId = userRoles.map((userRole) => userRole.roleId);
@@ -96,15 +90,6 @@ class UserService {
 
         return result;
     }
-
-
-    // async getRoleByUserId(userId) {
-    //     const userRole = await this.getUserRoleByUserId(userId);
-    //     const roleId = userRole.roleId;
-
-    //     const result = await roleRepository.findRoleById(roleId);
-    //     return result;
-    // }
 
 
     async deleteUser(userId) {

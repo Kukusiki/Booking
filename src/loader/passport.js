@@ -1,7 +1,7 @@
 const passport = require('passport');
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const JwtStrategy = require('passport-jwt').Strategy;
-const secret = require('../const').SECRET_TOKEN;
+const secret = require('../env').token.secret;
 
 passport.use(
     new JwtStrategy({
