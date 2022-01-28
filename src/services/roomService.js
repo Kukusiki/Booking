@@ -3,6 +3,9 @@ const hotelRepository = require('../repositories/hotelRepository');
 const bookingRepository = require('../repositories/bookingRepository');
 const NotFoundError = require('../utils/notFoundError');
 const BadRequestError = require('../utils/badRequestError');
+const InternalServerError = require('../utils/internalServerError');
+const fs = require('fs/promises');
+const sequelize = require('../db');
 
 class RoomService {
 
@@ -64,9 +67,23 @@ class RoomService {
 
 
     async deleteRoom(roomId) {
-        await this.getRoomById(roomId);
+        const room = await this.getRoomById(roomId);
+        let result;
+        const photo = room.photo;
+        const transaction = await sequelize.transaction();
 
-        const result = await roomRepository.delete(roomId);
+        try {
+            result = await roomRepository.delete(roomId, transaction);
+            if (photo !== null) {
+                await fs.unlink(photo);
+            }
+
+            await transaction.commit();
+        } catch (error) {
+            await transaction.rollback();
+            throw new InternalServerError('File deletion error');
+        }
+
         return result;
     }
 
