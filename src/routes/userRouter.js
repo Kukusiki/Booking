@@ -1,10 +1,12 @@
 const userController = require('../controllers/userController');
 const admin = require('../middleware/isAdmin');
 const user = require('../middleware/isUser');
+const validate = require('../middleware/validate');
+const userScheme = require('../validate/userScheme');
+const tryCatch = require('../utils/tryCatch');
 
 const express = require('express');
 const router = express.Router();
-const tryCatch = require('../utils/tryCatch');
 
 
 //router.use(user);
@@ -16,8 +18,8 @@ router.get('/:id/userInfo', tryCatch(userController.getUserInfoByUserId));
 router.get('/:id/userRole', tryCatch(userController.getUserRoleByUserId));
 
 //router.use(admin);
-router.post('/', tryCatch(userController.addUser));
-router.post('/:id', tryCatch(userController.addAdminByUserId));
+router.post('/', validate(userScheme.create), tryCatch(userController.addUser));
+router.post('/:id', validate(userScheme.create), tryCatch(userController.addAdminByUserId));
 router.delete('/:id', tryCatch(userController.deleteUser));
 
 module.exports = router;

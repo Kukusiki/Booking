@@ -1,10 +1,10 @@
 const userRoleController = require('../controllers/userRoleController');
 const admin = require('../middleware/isAdmin');
 const user = require('../middleware/isUser');
+const tryCatch = require('../utils/tryCatch');
 
 const express = require('express');
 const router = express.Router();
-const tryCatch = require('../utils/tryCatch');
 
 
 //router.use(user);

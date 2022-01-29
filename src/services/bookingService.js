@@ -16,6 +16,14 @@ class BookingService {
             throw new NotFoundError('User not found');
         }
 
+        const roomId = booking.roomId;
+        const { cost } = await roomRepository.findRoomById(roomId);
+        const startDate = new Date(booking.startDate);
+        const endDate = new Date(booking.endDate);
+
+        const days = (endDate - startDate) / 1000 / 60 / 60 / 24;
+        booking.cost = days * cost;
+
         const result = await bookingRepository.create(booking);
         return result;
     }

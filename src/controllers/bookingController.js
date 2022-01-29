@@ -5,7 +5,7 @@ class BookingController {
 
     async addBooking(req, res, next) {
         const booking = req.body;
-        await bookingService.addHotel(booking);
+        await bookingService.addBooking(booking);
 
         res.status(StatuseCodes.CREATED).json({ message: 'Booking created successfully' });
     }
