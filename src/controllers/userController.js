@@ -67,6 +67,13 @@ class UserController {
     }
 
 
+    async getUsers(req, res, next) {
+        const result = await userService.getUsers();
+
+        res.status(StatuseCodes.OK).json({ message: result });
+    }
+
+
     async deleteUser(req, res, next) {
         const userId = req.params.id;
         const numberOfUsers = await userService.deleteUser(userId);

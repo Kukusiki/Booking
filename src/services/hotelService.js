@@ -1,3 +1,5 @@
+const sequelize = require('../db');
+const Sequelize = require('sequelize');
 const hotelRepository = require('../repositories/hotelRepository');
 const roomRepository = require('../repositories/roomRepository');
 const reviewRepository = require('../repositories/reviewRepository');
@@ -65,6 +67,25 @@ class HotelService {
 
         const result = await reviewRepository.findReviewsByHotelId(hotelId);
         return result;
+    }
+
+
+    async getHotel(date) {
+        const query = `select h.id, h.name, h.photo, h.description from booking.hotels h 
+        join booking.reviews r on h.id = r.hotel_id 
+        join booking.rooms rm on h.id = rm.hotel_id 
+        join booking.bookings b on rm.id = b.room_id 
+        where timestampdiff(month, b.createdAt, '${date}') = 0 
+        group by h.id 
+        having avg(r.rate) > 3 
+        order by count(b.id) desc 
+        limit 1;`;
+
+        const result = await sequelize.query(
+            query, {
+                type: Sequelize.QueryTypes.SELECT
+            });
+        return result[0];
     }
 
 

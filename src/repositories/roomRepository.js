@@ -32,8 +32,8 @@ class RoomRepository {
         return result;
     }
 
-    async delete(id) {
-        const result = await roomModels.destroy({ where: { id } });
+    async delete(id, trans) {
+        const result = await roomModels.destroy({ where: { id }, transaction: trans });
         return result;
     }
 };

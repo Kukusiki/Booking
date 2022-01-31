@@ -9,5 +9,5 @@ const fileFilter = (req, file, cb) => {
     }
 }
 
-const upload = multer({ dest: '../img', fileFilter: fileFilter });
+const upload = multer({ dest: './img', fileFilter: fileFilter });
 module.exports = upload;

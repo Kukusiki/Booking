@@ -20,14 +20,14 @@ const router = express.Router();
 router.use(bodyParser.json());
 router.use(passport.initialize());
 
-router.use('/bookings', /*passport.authenticate('jwt'),*/ bookingRouter);
+router.use('/bookings', passport.authenticate('jwt', { session: false }), bookingRouter);
 router.use('/hotels', passport.authenticate('jwt', { session: false }), hotelRouter);
-router.use('/reviews', /*passport.authenticate('jwt'),*/ reviewRouter);
-router.use('/roles', /*passport.authenticate('jwt'),*/ roleRouter);
-router.use('/rooms', /*passport.authenticate('jwt', { session: false }),*/ roomRouter);
-router.use('/userInfos', /*passport.authenticate('jwt'),*/ userInfoRouter);
-router.use('/userRoles', /*passport.authenticate('jwt'),*/ userRoleRouter);
-router.use('/users', /*passport.authenticate('jwt'),*/ userRouter);
+router.use('/reviews', passport.authenticate('jwt', { session: false }), reviewRouter);
+router.use('/roles', passport.authenticate('jwt', { session: false }), roleRouter);
+router.use('/rooms', passport.authenticate('jwt', { session: false }), roomRouter);
+router.use('/userInfos', passport.authenticate('jwt', { session: false }), userInfoRouter);
+router.use('/userRoles', passport.authenticate('jwt', { session: false }), userRoleRouter);
+router.use('/users', passport.authenticate('jwt', { session: false }), userRouter);
 router.use('/login', loginRouter);
 
 router.use(error);
