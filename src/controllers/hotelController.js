@@ -61,6 +61,14 @@ class HotelController {
     }
 
 
+    async getHotel(req, res, next) {
+        const date = req.params.date;
+        const result = await hotelService.getHotel(date);
+
+        res.status(StatuseCodes.OK).json({ message: result });
+    }
+
+
     async deleteHotel(req, res, next) {
         const hotelId = req.params.id;
         const numberOfHotels = await hotelService.deleteHotel(hotelId);

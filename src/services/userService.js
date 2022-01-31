@@ -1,3 +1,5 @@
+const sequelize = require('../db');
+const Sequelize = require('sequelize');
 const userRepository = require('../repositories/userRepository');
 const reviewRepository = require('../repositories/reviewRepository');
 const bookingRepository = require('../repositories/bookingRepository');
@@ -88,6 +90,25 @@ class UserService {
 
         const result = await Promise.all(rolesId.map(async(roleId) => await roleRepository.findRoleById(roleId)));
 
+        return result;
+    }
+
+
+    async getUsers() {
+        const query = `select us.id, us.email, us.password from booking.users us
+        join booking.bookings b on us.id = b.user_id
+        group by us.id, us.email, us.password
+        having count(b.id) > 2
+            and count(b.id) >= (
+                select avg(t.count) from (select count(b.id) as count from booking.users us
+                join booking.bookings b on us.id = b.user_id
+                group by us.id) as t
+            );`;
+
+        const result = await sequelize.query(
+            query, {
+                type: Sequelize.QueryTypes.SELECT
+            });
         return result;
     }
 

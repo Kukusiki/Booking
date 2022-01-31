@@ -9,12 +9,12 @@ const express = require('express');
 const router = express.Router();
 
 
-//router.use(user);
+router.use(user);
 router.get('/:id', tryCatch(roleController.getRoleById));
 router.get('/', tryCatch(roleController.getAllRoles));
 router.get('/:id/userRole', tryCatch(roleController.getUserRoleByRoleId));
 
-//router.use(admin);
+router.use(admin);
 router.post('/', validate(roleScheme.create), tryCatch(roleController.addRole));
 router.delete('/:id', tryCatch(roleController.deleteRole));
 

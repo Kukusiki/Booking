@@ -9,13 +9,13 @@ const express = require('express');
 const router = express.Router();
 
 
-//router.use(user);
+router.use(user);
 router.get('/:id', tryCatch(bookingController.getBookingById));
 router.get('/', tryCatch(bookingController.getAllBookings));
 router.get('/:id/room', tryCatch(bookingController.getRoomByBookingId));
 router.get('/:id/user', tryCatch(bookingController.getUserByBookingId));
 
-//router.use(admin);
+router.use(admin);
 router.post('/', validate(bookingScheme.create), tryCatch(bookingController.addBooking));
 router.delete('/:id', tryCatch(bookingController.deleteBooking));
 
