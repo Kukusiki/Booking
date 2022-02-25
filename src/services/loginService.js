@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const userService = require('./userService');
 const BadRequestError = require('../utils/badRequestError');
-const secretToken = require('../const').SECRET_TOKEN;
+const secretToken = require('../env').token.secret;
 
 class LoginService {
 

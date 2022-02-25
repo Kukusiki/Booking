@@ -13,6 +13,10 @@ module.exports = {
         email: process.env.ADMIN_EMAIL || 'aaa',
         password: process.env.ADMIN_PASS || 'aaa'
     },
+    admin2: {
+        email: process.env.ADMIN2_EMAIL || 'aaa',
+        password: process.env.ADMIN2_PASS || 'aaa'
+    },
     token: {
         secret: process.env.SECRET || 'aaa'
     }

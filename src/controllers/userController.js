@@ -1,11 +1,14 @@
 const userService = require('../services/userService');
 const StatuseCodes = require('http-status-codes').StatusCodes;
+const sendMail = require('../utils/sendMail');
 
 class UserController {
 
     async addUser(req, res, next) {
         const user = req.body;
         await userService.addUser(user);
+
+        await sendMail.send(user.email);
 
         res.status(StatuseCodes.CREATED).json({ message: 'User created successfully' });
     }
