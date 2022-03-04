@@ -5,6 +5,7 @@ const roomRepository = require('../repositories/roomRepository');
 const reviewRepository = require('../repositories/reviewRepository');
 const NotFoundError = require('../utils/notFoundError');
 const BadRequestError = require('../utils/badRequestError');
+const bookingRepository = require('../repositories/bookingRepository');
 
 class HotelService {
 
@@ -86,6 +87,55 @@ class HotelService {
                 type: Sequelize.QueryTypes.SELECT
             });
         return result[0];
+    }
+
+
+    async getAllBookingByHotelId(hotelId) {
+        const rooms = await roomRepository.findRoomsByHotelId(hotelId);
+        let bookings = [];
+
+        for (let i = 0; i < rooms.length; i++) {
+            const room = rooms[i];
+            const booking = await bookingRepository.findBookingsByRoomId(room.id)
+            bookings = bookings.concat(booking);
+        }
+
+        return bookings;
+    }
+
+
+    async getOldHotels() {
+        const hotels = await this.getAllHotels();
+        let result = [];
+        for (let i = 0; i < hotels.length; i++) {
+            const hotel = hotels[i];
+            const bookings = await this.getAllBookingByHotelId(hotel.id);
+
+            let now = new Date();
+            let last3month = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            last3month.setMonth(now.getMonth() - 3);
+
+            let old = true;
+            for (let j = 0;
+                (j < bookings.length) && old; j++) {
+                const booking = bookings[i];
+                if (booking.endDate > last3month) {
+                    old = false;
+                }
+            }
+
+            if (old) {
+                result.push(hotel);
+            }
+        }
+        return result;
+    }
+
+
+    async deleteHotels(hotels) {
+        for (let i = 0; i < hotels.length; i++) {
+            await this.deleteHotel(hotels[i].id);
+        }
     }
 
 
